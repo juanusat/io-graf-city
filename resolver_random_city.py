@@ -11,25 +11,21 @@ def main():
     parser.add_argument('-n', '--name', required=True, help="Nombre del test")
     args = parser.parse_args()
 
-    # Generar el grafo
     generate_command = f"python random-city.py -r {args.r} -c {args.c} -f {args.f} -t {args.t} -n {args.name}"
     subprocess.run(generate_command, shell=True)
 
-    # Ejecutar el algoritmo de Kruskal
     kruskal_command = f"python mst_algorithms_no_lib.py -f city-test-{args.name}.txt -a kruskal -i mst_kruskal_{args.name}.png -r {args.r} -c {args.c}"
     subprocess.run(kruskal_command, shell=True)
 
-    # Ejecutar el algoritmo de Prim
     prim_command = f"python mst_algorithms_no_lib.py -f city-test-{args.name}.txt -a prim -i mst_prim_{args.name}.png -r {args.r} -c {args.c}"
     subprocess.run(prim_command, shell=True)
 
-    # Preguntar si desea borrar los archivos generados
     delete_files = input("¿Desea borrar los archivos generados? (s/n): ")
     if delete_files.lower() == 's':
         os.remove(f"city-test-{args.name}.txt")
         os.remove(f"city-test-{args.name}.png")
-        os.remove(f"mst_kruskal_{args.name}.png")
-        os.remove(f"mst_prim_{args.name}.png")
+        os.remove(f"city-test-{args.name}-mst_kruskal.png")
+        os.remove(f"city-test-{args.name}-mst_prim.png")
         print("Archivos borrados.")
 
 if __name__ == "__main__":
