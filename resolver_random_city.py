@@ -12,15 +12,15 @@ def main():
     args = parser.parse_args()
 
     # Generar el grafo
-    generate_command = f"python3 random-city.py -r {args.r} -c {args.c} -f {args.f} -t {args.t} -n {args.name}"
+    generate_command = f"python random-city.py -r {args.r} -c {args.c} -f {args.f} -t {args.t} -n {args.name}"
     subprocess.run(generate_command, shell=True)
 
     # Ejecutar el algoritmo de Kruskal
-    kruskal_command = f"python3 mst_algorithms_no_lib.py -f city-test-{args.name}.txt -a kruskal -i mst_kruskal_{args.name}.png"
+    kruskal_command = f"python mst_algorithms_no_lib.py -f city-test-{args.name}.txt -a kruskal -i mst_kruskal_{args.name}.png"
     subprocess.run(kruskal_command, shell=True)
 
     # Ejecutar el algoritmo de Prim
-    prim_command = f"python3 mst_algorithms_no_lib.py -f city-test-{args.name}.txt -a prim -i mst_prim_{args.name}.png"
+    prim_command = f"python mst_algorithms_no_lib.py -f city-test-{args.name}.txt -a prim -i mst_prim_{args.name}.png"
     subprocess.run(prim_command, shell=True)
 
     # Preguntar si desea borrar los archivos generados
