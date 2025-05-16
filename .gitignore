@@ -4,3 +4,4 @@ priv-*
 *.graphml
 *.txt
 *.png
+.aider*
