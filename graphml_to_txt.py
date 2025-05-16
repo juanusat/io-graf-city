@@ -5,7 +5,7 @@ def convert_graphml_to_txt(graphml_file, txt_file):
     G = ox.load_graphml(graphml_file)
     with open(txt_file, 'w') as f:
         for u, v, data in G.edges(data=True):
-            weight = data.get('length', 1.0)  # usa 1.0 si no hay longitud
+            weight = data.get('length', 1.0)
             f.write(f"{u} {v} {weight:.2f}\n")
     print(f"Archivo generado: {txt_file}")
 
