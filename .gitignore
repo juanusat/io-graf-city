@@ -1,3 +1,6 @@
 cache/
 __pycache__/
 priv-*
+*.graphml
+*.txt
+*.png
