@@ -16,11 +16,11 @@ def main():
     subprocess.run(generate_command, shell=True)
 
     # Ejecutar el algoritmo de Kruskal
-    kruskal_command = f"python mst_algorithms_no_lib.py -f city-test-{args.name}.txt -a kruskal -i mst_kruskal_{args.name}.png"
+    kruskal_command = f"python mst_algorithms_no_lib.py -f city-test-{args.name}.txt -a kruskal -i mst_kruskal_{args.name}.png -r {args.r} -c {args.c}"
     subprocess.run(kruskal_command, shell=True)
 
     # Ejecutar el algoritmo de Prim
-    prim_command = f"python mst_algorithms_no_lib.py -f city-test-{args.name}.txt -a prim -i mst_prim_{args.name}.png"
+    prim_command = f"python mst_algorithms_no_lib.py -f city-test-{args.name}.txt -a prim -i mst_prim_{args.name}.png -r {args.r} -c {args.c}"
     subprocess.run(prim_command, shell=True)
 
     # Preguntar si desea borrar los archivos generados
