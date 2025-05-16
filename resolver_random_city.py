@@ -24,8 +24,8 @@ def main():
     if delete_files.lower() == 's':
         os.remove(f"city-test-{args.name}.txt")
         os.remove(f"city-test-{args.name}.png")
-        os.remove(f"city-test-{args.name}-mst_kruskal.png")
-        os.remove(f"city-test-{args.name}-mst_prim.png")
+        os.remove(f"city-test-{args.name}_mst_kruskal.png")
+        os.remove(f"city-test-{args.name}_mst_prim.png")
         print("Archivos borrados.")
 
 if __name__ == "__main__":
