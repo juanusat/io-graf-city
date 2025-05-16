@@ -5,21 +5,14 @@ import networkx as nx
 import matplotlib.pyplot as plt
 
 def generate_grid_graph(rows, cols, wmin, wmax):
-    """
-    Genera un grafo en malla de 'rows' filas y 'cols' columnas.
-    Cada nodo se identifica con un entero u = i*cols + j.
-    Añade aristas horizontales y verticales con peso aleatorio en [wmin, wmax].
-    """
     G = nx.Graph()
     for i in range(rows):
         for j in range(cols):
             u = i * cols + j
-            # Arista horizontal a la derecha
             if j < cols - 1:
                 v = i * cols + (j + 1)
                 w = random.uniform(wmin, wmax)
                 G.add_edge(u, v, weight=w)
-            # Arista vertical hacia abajo
             if i < rows - 1:
                 v = (i + 1) * cols + j
                 w = random.uniform(wmin, wmax)
@@ -27,18 +20,15 @@ def generate_grid_graph(rows, cols, wmin, wmax):
     return G
 
 def save_edge_list(G, path):
-    """Guarda la lista de aristas en formato 'u v w'."""
     with open(path, 'w') as f:
         for u, v, data in G.edges(data=True):
             f.write(f"{u} {v} {data['weight']:.3f}\n")
 
 def draw_graph(G, path):
-    """Dibuja el grafo con etiquetas de peso y guarda la imagen."""
     pos = {}
-    # Posicionar nodos en una cuadrícula
     for u in G.nodes():
         i, j = divmod(u, cols)
-        pos[u] = (j, -i)  # invertir y para que crezca hacia abajo
+        pos[u] = (j, -i)
     plt.figure(figsize=(cols, rows))
     nx.draw(G, pos, with_labels=True, node_size=300, font_size=8, edge_color='gray')
     labels = { (u,v): f"{d['weight']:.1f}" for u,v,d in G.edges(data=True) }
