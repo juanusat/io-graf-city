@@ -14,10 +14,10 @@ def main():
     generate_command = f"python random-city.py -r {args.r} -c {args.c} -f {args.f} -t {args.t} -n {args.name}"
     subprocess.run(generate_command, shell=True)
 
-    kruskal_command = f"python mst_algorithms_no_lib.py -f city-test-{args.name}.txt -a kruskal -i city-test-{args.name}_mst_kruskal.png -r {args.r} -c {args.c}"
+    kruskal_command = f"python use-mst.py -f city-test-{args.name}.txt -a kruskal -i city-test-{args.name}_mst_kruskal.png -r {args.r} -c {args.c}"
     subprocess.run(kruskal_command, shell=True)
 
-    prim_command = f"python mst_algorithms_no_lib.py -f city-test-{args.name}.txt -a prim -i city-test-{args.name}_mst_prim.png -r {args.r} -c {args.c}"
+    prim_command = f"python use-mst.py -f city-test-{args.name}.txt -a prim -i city-test-{args.name}_mst_prim.png -r {args.r} -c {args.c}"
     subprocess.run(prim_command, shell=True)
 
     delete_files = input("¿Desea borrar los archivos generados? (s/n): ")
