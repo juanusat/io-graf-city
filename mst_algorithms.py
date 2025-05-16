@@ -1,3 +1,5 @@
+import heapq
+
 def kruskal(nodes, edges):
     sorted_edges = sorted(edges, key=lambda x: x[2])
     parent = {n: n for n in nodes}
