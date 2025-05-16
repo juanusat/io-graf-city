@@ -1,0 +1,4 @@
+scipy
+osmnx
+networkx
+matplotlib
