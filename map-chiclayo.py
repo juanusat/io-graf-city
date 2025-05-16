@@ -4,6 +4,7 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import geopandas as gpd
 from shapely.geometry import Polygon
+from mst_algorithms import kruskal, prim
 
 def main(xi, yi, xf, yf):
     place = "Chiclayo, Lambayeque, Peru"
@@ -43,15 +44,16 @@ def main(xi, yi, xf, yf):
     print(f"Subgrafo recortado: nodos = {len(G_sub.nodes)}, aristas = {len(G_sub.edges)}")
 
     G_ud = G_sub.to_undirected()
-    mst_k = nx.minimum_spanning_tree(G_ud, weight='length', algorithm='kruskal')
-    mst_p = nx.minimum_spanning_tree(G_ud, weight='length', algorithm='prim')
+    edges = [(u, v, data['length']) for u, v, data in G_ud.edges(data=True)]
+    nodes = list(G_ud.nodes)
+
+    mst_k, total_k = kruskal(nodes, edges)
+    mst_p, total_p = prim(nodes, G_ud.adjacency())
 
     def print_recorrido(mst, title):
         print(f"\nRecorrido del MST ({title}):")
-        for u, v, data in mst.edges(data=True):
-            name = data.get('name', 'Sin nombre')
-            street = name[0] if isinstance(name, list) else name
-            print(f"  Nodo {u} ↔ Nodo {v} : {street}")
+        for u, v, w in mst:
+            print(f"  Nodo {u} ↔ Nodo {v} : {w}")
 
     print_recorrido(mst_k, "Kruskal")
     print_recorrido(mst_p, "Prim")
