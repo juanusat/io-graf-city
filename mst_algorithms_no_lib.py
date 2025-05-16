@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 import argparse
 import matplotlib.pyplot as plt
 import networkx as nx
@@ -83,25 +82,21 @@ def draw_graph_with_mst(nodes, edges, mst_edges, image_file, rows=None, cols=Non
     for u, v, w in edges:
         G.add_edge(u, v, weight=w)
 
-    # Determine positions
     if rows and cols:
         pos = {n: (int(n) % cols, - (int(n) // cols)) for n in nodes}
     else:
         pos = nx.spring_layout(G)
 
     plt.figure(figsize=(8, 8))
-    # Draw base graph
     nx.draw(G, pos, with_labels=True, node_size=200, node_color='lightgrey', edge_color='lightgrey')
 
-    # Highlight MST
     mst_graph = nx.Graph()
     for u, v, w in mst_edges:
         mst_graph.add_edge(u, v, weight=w)
-    # Draw MST edges and nodes
+
     nx.draw_networkx_nodes(mst_graph, pos, node_size=200, node_color='red')
     nx.draw_networkx_edges(mst_graph, pos, width=2.0, edge_color='red')
 
-    # Edge labels for MST
     edge_labels = { (u, v): f"{w:.1f}" for u, v, w in mst_edges }
     nx.draw_networkx_edge_labels(mst_graph, pos, edge_labels=edge_labels, font_color='red', font_size=6)
 
