@@ -1,0 +1,36 @@
+import argparse
+import subprocess
+import os
+
+def main():
+    parser = argparse.ArgumentParser(description="Genera un grafo y resuelve el MST.")
+    parser.add_argument('-r', type=int, required=True, help="Número de filas")
+    parser.add_argument('-c', type=int, required=True, help="Número de columnas")
+    parser.add_argument('-f', type=float, required=True, help="Peso mínimo")
+    parser.add_argument('-t', type=float, required=True, help="Peso máximo")
+    parser.add_argument('-n', '--name', required=True, help="Nombre del test")
+    args = parser.parse_args()
+
+    # Generar el grafo
+    generate_command = f"python3 random-city.py -r {args.r} -c {args.c} -f {args.f} -t {args.t} -n {args.name}"
+    subprocess.run(generate_command, shell=True)
+
+    # Ejecutar el algoritmo de Kruskal
+    kruskal_command = f"python3 mst_algorithms_no_lib.py -f city-test-{args.name}.txt -a kruskal -i mst_kruskal_{args.name}.png"
+    subprocess.run(kruskal_command, shell=True)
+
+    # Ejecutar el algoritmo de Prim
+    prim_command = f"python3 mst_algorithms_no_lib.py -f city-test-{args.name}.txt -a prim -i mst_prim_{args.name}.png"
+    subprocess.run(prim_command, shell=True)
+
+    # Preguntar si desea borrar los archivos generados
+    delete_files = input("¿Desea borrar los archivos generados? (s/n): ")
+    if delete_files.lower() == 's':
+        os.remove(f"city-test-{args.name}.txt")
+        os.remove(f"city-test-{args.name}.png")
+        os.remove(f"mst_kruskal_{args.name}.png")
+        os.remove(f"mst_prim_{args.name}.png")
+        print("Archivos borrados.")
+
+if __name__ == "__main__":
+    main()
