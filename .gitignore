@@ -6,3 +6,4 @@ priv-*
 *.png
 .aider*
 .ipynb_checkpoints/
+*.ipynb
