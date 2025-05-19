@@ -5,3 +5,4 @@ priv-*
 *.txt
 *.png
 .aider*
+.ipynb_checkpoints/
