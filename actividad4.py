@@ -2,7 +2,7 @@ import networkx as nx
 import matplotlib.pyplot as plt
 
 filename = "modelo-g3.txt"
-dibujar = True 
+dibujar = True
 
 edges = []
 source = None
